@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useMemo, useState } from "react";
+import { usePosts } from "./hooks/usePosts";
+import SearchBar from "./components/SearchBar";
+import Filters from "./components/Filters";
+import PostList from "./components/PostList";
+import Pagination from "./components/Pagination";
+import Favorites from "./components/Favorites";
+import { paginate } from "./utils/pagination";
 
-function App() {
-  const [count, setCount] = useState(0)
+// pagination size constant
+const PAGE_SIZE = 10;
+
+export default function App() {
+  const { posts, users, loading } = usePosts();
+// search bar
+  const [search, setSearch] = useState("");
+  const [userId, setUserId] = useState("");
+  const [page, setPage] = useState(1);
+  // Task 3: User Interaction
+  const [favorites, setFavorites] = useState([]);
+
+  const filtered = useMemo(() => {
+    return posts.filter(p => {
+      return (
+        (!search || p.title.includes(search)) &&
+        (!userId || p.userId === Number(userId))
+      );
+    });
+  }, [posts, search, userId]);
+// get paginated items
+  const pageItems = paginate(filtered, page, PAGE_SIZE);
+
+  if (loading) return <p>Cargando...</p>;
+
 
   return (
-    <>
+  
+  <div className="container">
+    <div className="header">
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Frontend Technical Test</h1>
+        <div className="muted">Posts + Search + Filter + Favorites + Pagination</div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <span className="badge">Resultados: {filtered.length}</span>
+    </div>
+
+    <div className="panel toolbar">
+      {/*search and filter components*/}
+      <SearchBar value={search} onChange={setSearch} />
+      <Filters users={users} onChange={setUserId} />
+    </div>
+
+    <div className="layout">
+      <div className="grid">
+         {/* Task 1: Data Fetching and Display  */}
+      {/* Task 3: User Interaction and State Management - remove favorites. */}
+        <PostList items={pageItems} favorites={favorites} onFavorite={setFavorites} />
+        <Pagination
+          page={page}
+          total={Math.ceil(filtered.length / PAGE_SIZE)}
+          onChange={setPage}
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      <div className="panel">
+        <Favorites items={favorites} />
+      </div>
+    </div>
+  </div>
+);
 }
 
-export default App
+
