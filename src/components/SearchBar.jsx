@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 
 export default function SearchBar({ value, onChange }) {
+  // Mostrar el botón de borrar solo si hay texto en el campo de búsqueda
   const showClear = Boolean(value);
 
   return (

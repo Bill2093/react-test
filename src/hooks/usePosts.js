@@ -1,3 +1,4 @@
+//Task 1: Data Fetching
 import { useEffect, useState } from "react";
 import { fetchPosts, fetchUsers } from "../api/jsonPlaceholder";
 

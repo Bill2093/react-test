@@ -17,13 +17,13 @@ import {
   Chip,
   Divider,
 } from "@mui/material";
-
+//pagination
 const PAGE_SIZE = 10;
 
 export default function App() {
 
   const { posts, users, loading, error } = usePosts();
-
+// Estado para búsqueda, filtrado, paginación y favoritos.
   const [search, setSearch] = useState("");
   const [userId, setUserId] = useState("");
 
@@ -45,12 +45,12 @@ export default function App() {
       return matchesSearch && matchesUser;
     });
   }, [posts, search, userId]);
-
+  // Calcular el número total de páginas.
   const total = useMemo(
     () => Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)),
     [filtered.length]
   );
-
+  // Actualiza la búsqueda y reinicia la paginación.
   const handleSearchChange = (value) => {
     setPage(1);
     setSearch(value);
@@ -66,7 +66,7 @@ export default function App() {
       current.filter((favorite) => favorite.id !== id)
     );
   };
-
+  // Mostrar solo los elementos de la lista filtrada que pertenecen a la página actual.
   const pageItems = useMemo(
     () => paginate(filtered, page, PAGE_SIZE),
     [filtered, page]
@@ -95,7 +95,7 @@ export default function App() {
         justifyContent="space-between"
         alignItems="flex-end"
         spacing={2}
-      >
+      > {/* Task 4 (Styling and Responsiveness) */}
         <Box>
           <Typography variant="h4" fontWeight={700}>
             React Technical Test
@@ -112,9 +112,10 @@ export default function App() {
         <Paper variant="outlined" sx={{ p: 2, borderRadius: 3 }}>
           <Stack spacing={2} direction={{ xs: "column", md: "row" }}>
             <Box sx={{ flex: 1 }}>
+              {/*Task 2: search */}
               <SearchBar value={search} onChange={handleSearchChange} />
             </Box>
-
+              {/* Task 2: User filter select. */}
             <Box sx={{ width: { xs: "100%", md: 320 } }}>
               <Filters users={users} userId={userId} onChange={handleUserChange} />
             </Box>
@@ -127,19 +128,21 @@ export default function App() {
         spacing={2}
         sx={{ mt: 2 }}
         alignItems="flex-start"
-      >
+
+      >{/*Task 1 (Data Fetching and Display   &  Task 3 (User Interaction and State Management)*/}
+
         <Box sx={{ flex: 1, width: "100%" }}>
           <PostList
             items={pageItems}
             favorites={favorites}
             onFavorite={setFavorites}
           />
-
+          {/* Search + filter toolbar. */}
           <Box sx={{ mt: 2 }}>
             <Pagination page={page} total={total} onChange={setPage} />
           </Box>
         </Box>
-
+         {/* Favorites panel. */}
         <Box sx={{ width: { xs: "100%", md: 360 } }}>
           <Paper variant="outlined" sx={{ p: 2, borderRadius: 3 }}>
             <Typography variant="h6" fontWeight={700}>

@@ -1,3 +1,4 @@
+// MUI icono para borrar la barra de busqueda (X) 
 import CloseIcon from "@mui/icons-material/Close";
 import {
   FormControl,
