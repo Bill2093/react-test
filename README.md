@@ -10,9 +10,9 @@ puntos manejados:
 - quitar y poner objetos
 
 ### 📷 Capturas
-| List | Favorites | Filters |
-|<img src="Screenshots/1.webp" width="300"/> | <img src="Screenshots/2.webp" width="300"/> | <img src="Screenshots/3.webp" width="300"/>|
-|<img src="Screenshots/4.webp" width="400"/> | <img src="Screenshots/5.webp" width="400"/>|
+
+<img src="Screenshots/1.webp" width="300"/> | <img src="Screenshots/2.webp" width="300"/> | <img src="Screenshots/3.webp" width="300"/>
+<img src="Screenshots/4.webp" width="400"/> | <img src="Screenshots/5.webp" width="400"/>
 
 ### Instructions:
 - Create a github repository.
