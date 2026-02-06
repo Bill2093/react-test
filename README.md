@@ -9,8 +9,8 @@ puntos manejados:
 - busqueda
 - quitar y poner objetos
 
-  ### 📷 Capturas
-
+### 📷 Capturas
+<img src="Screenshots/1.webp" width="400"/> | <img src="Screenshots/2.webp" width="400"/>
 
 
 ### Instructions:
