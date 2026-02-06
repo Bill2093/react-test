@@ -1,21 +1,44 @@
-export default function Favorites({ items }) {
+import {
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
+
+export default function Favorites({ items, onRemove }) {
   if (items.length === 0) {
     return (
-      <section>
-        <h2>Favoritos</h2>
-        <p>No hay favoritos todavía.</p>
-      </section>
+      <Typography variant="body2" color="text.secondary">
+        No has agregado favoritos.
+      </Typography>
     );
   }
 
   return (
-    <section>
-      <h2>Favoritos</h2>
-      <ul>
-        {items.map(item => (
-          <li key={item.id}>{item.title}</li>
-        ))}
-      </ul>
-    </section>
+    <List dense sx={{ width: "100%" }}>
+      {items.map((p) => (
+        <ListItem key={p.id} divider sx={{ px: 0 }}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={1}
+            alignItems={{ xs: "flex-start", sm: "center" }}
+            justifyContent="space-between"
+            sx={{ width: "100%" }}
+          >
+            <ListItemText primary={p.title} secondary={`Post #${p.id}`} />
+            <Button
+              color="error"
+              variant="text"
+              size="small"
+              onClick={() => onRemove(p.id)}
+            >
+              Quitar
+            </Button>
+          </Stack>
+        </ListItem>
+      ))}
+    </List>
   );
 }

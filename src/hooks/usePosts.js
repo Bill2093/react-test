@@ -5,11 +5,11 @@ export function usePosts() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-useEffect(() => {
-    Promise.all([fetchPosts(), fetchUsers()]).then(([postsData, usersData]) => {
-      setPosts(postsData);
-      setUsers(usersData);
+
+  useEffect(() => {
+    Promise.all([fetchPosts(), fetchUsers()]).then(([p, u]) => {
+      setPosts(p);
+      setUsers(u);
       setLoading(false);
     });
   }, []);
