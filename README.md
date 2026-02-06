@@ -1,16 +1,38 @@
-# React + Vite
+# Frontend Technical Test: React Developer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+👉 [Ver demo del juego en YouTube](https://youtu.be/NOqkQWgPhcw)
 
-Currently, two official plugins are available:
+Prueba tecnica diseñada con reac y framework con MUI, 
+puntos manejados: 
+- paginacion
+- filtros
+- busqueda
+- quitar y poner objetos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  ### 📷 Capturas
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+### Instructions:
+Ø Create a github repository.
+Ø Complete the tasks described below within the project.
+Ø Commit your changes and create a pull request to the main repository.
+Tasks:
+Task 1: Data Fetching and Display
+Ø Fetch data from the following public API: [https://jsonplaceholder.typicode.com/]
+Ø Display the fetched data in a user-friendly list format.
+Ø Implement pagination for the list, displaying 10 items per page.
+Task 2: Search and Filtering
+Ø Add a search bar that allows users to filter the displayed list based on a
+keyword.
+Ø Implement filtering options to further refine the list based on specific criteria
+(e.g., category, price range).
+Task 3: User Interaction and State Management
+Ø Allow users to select items from the list and add them to a "favorites" list.
+Ø Display the "favorites" list in a separate section.
+Ø Implement the ability to remove items from the "favorites" list.
+Task 4: Styling and Responsiveness
+Ø Utilize a SCSS framework like Material-UI or Ant Design for a consistent and visually
+appealing UI.
+Ø Ensure the application is responsive and adapts well to different screen sizes.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
