@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { usePosts } from "./hooks/usePosts";
 import { paginate } from "./utils/pagination";
 
@@ -15,7 +15,6 @@ import {
   Typography,
   Paper,
   Chip,
-  Divider,
 } from "@mui/material";
 
 const PAGE_SIZE = 10;
@@ -33,7 +32,18 @@ export default function App() {
   // Favoritos
   const [favorites, setFavorites] = useState([]);
 
-  // 1) Filtrar primero (search + userId)
+  // Handlers controlados
+  const handleSearchChange = (value) => {
+    setPage(1);
+    setSearch(value);
+  };
+
+  const handleUserChange = (value) => {
+    setPage(1);
+    setUserId(value);
+  };
+
+  // 1) Filtrar primero
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
 
@@ -50,15 +60,16 @@ export default function App() {
   }, [posts, search, userId]);
 
   // 2) Total de páginas
-  const total = useMemo(() => Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)), [filtered.length]);
+  const total = useMemo(
+    () => Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)),
+    [filtered.length]
+  );
 
-  // 3) Si cambia búsqueda/filtro, volver a página 1
-  useEffect(() => {
-    setPage(1);
-  }, [search, userId]);
-
-  // 4) Paginar al final
-  const pageItems = useMemo(() => paginate(filtered, page, PAGE_SIZE), [filtered, page]);
+  // 3) Paginar
+  const pageItems = useMemo(
+    () => paginate(filtered, page, PAGE_SIZE),
+    [filtered, page]
+  );
 
   if (loading) {
     return (
@@ -102,11 +113,18 @@ export default function App() {
         <Paper variant="outlined" sx={{ p: 2, borderRadius: 3 }}>
           <Stack spacing={2} direction={{ xs: "column", md: "row" }}>
             <Box sx={{ flex: 1 }}>
-              <SearchBar value={search} onChange={setSearch} />
+              <SearchBar
+                value={search}
+                onChange={handleSearchChange}
+              />
             </Box>
 
             <Box sx={{ width: { xs: "100%", md: 320 } }}>
-              <Filters users={users} userId={userId} onChange={setUserId} />
+              <Filters
+                users={users}
+                userId={userId}
+                onChange={handleUserChange}
+              />
             </Box>
           </Stack>
         </Paper>
@@ -128,21 +146,15 @@ export default function App() {
           />
 
           <Box sx={{ mt: 2 }}>
-            <Pagination page={page} total={total} onChange={setPage} />
+            <Pagination
+              page={page}
+              total={total}
+              onChange={setPage}
+            />
           </Box>
-        </Box>
-
-        {/* Favoritos */}
-        <Box sx={{ width: { xs: "100%", md: 360 } }}>
-          <Paper variant="outlined" sx={{ p: 2, borderRadius: 3 }}>
-            <Typography variant="h6" fontWeight={700}>
-              Favoritos
-            </Typography>
-            <Divider sx={{ my: 1.5 }} />
-            <Favorites items={favorites} />
-          </Paper>
         </Box>
       </Stack>
     </Container>
   );
 }
+
