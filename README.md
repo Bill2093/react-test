@@ -8,6 +8,7 @@ puntos manejados:
 - filtros
 - busqueda
 - quitar y poner objetos
+- input adornment
 
 #### 📷 Capturas
 
