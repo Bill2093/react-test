@@ -2,7 +2,7 @@
 
 👉 [Ver demo del juego en YouTube](https://youtu.be/NOqkQWgPhcw)
 
-Prueba tecnica diseñada con reac y framework con MUI, 
+Prueba tecnica diseñada con react y framework con MUI, 
 puntos manejados: 
 - paginacion
 - filtros
